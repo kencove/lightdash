@@ -20908,6 +20908,7 @@ const models: TsoaRoute.Models = {
                     array: { dataType: 'string' },
                     required: true,
                 },
+                pivotQuery: { dataType: 'string' },
                 query: { dataType: 'string', required: true },
             },
             validators: {},
@@ -43445,6 +43446,7 @@ export function RegisterRoutes(app: Router) {
                 {
                     dataType: 'nestedObjectLiteral',
                     nestedProperties: {
+                        pivotConfiguration: { ref: 'PivotConfiguration' },
                         parameters: { ref: 'ParametersValuesMap' },
                     },
                 },
