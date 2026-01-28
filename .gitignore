@@ -46,7 +46,6 @@ lightdash_dev.yml
 
 # misc
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -103,7 +102,6 @@ prometheus.yml
 data/
 
 # environment
-.env*
 
 .local/*
 
@@ -112,3 +110,4 @@ http-client.private.env.json
 
 # turbo
 .turbo
+config.bat
