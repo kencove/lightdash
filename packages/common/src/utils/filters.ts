@@ -293,10 +293,21 @@ export const getFilterRuleWithDefaultValue = <T extends FilterRule>(
                             ? defaultTimeIntervalValues[fieldTimeInterval]
                             : moment();
 
+                    // When a value is provided and field has a time interval,
+                    // normalize the date to the start of that interval
+                    // (e.g., "2024-07-15" → "2024-07-01" for QUARTER)
+                    // Use local time (not UTC) so that Date objects from the user's
+                    // browser are interpreted in their timezone correctly
+                    const normalizedDate =
+                        valueIsDate && fieldTimeInterval
+                            ? moment(value).startOf(
+                                  fieldTimeInterval.toLowerCase() as moment.unitOfTime.StartOf,
+                              )
+                            : moment.utc(value);
+
                     const dateValue = valueIsDate
                         ? formatDate(
-                              // Treat the date as UTC, then remove its timezone information before formatting
-                              moment.utc(value).format('YYYY-MM-DD'),
+                              normalizedDate.format('YYYY-MM-DD'),
                               // For QUARTER, we don't want to use the field's time interval(YYYY-[Q]Q) because the date is already in the correct format when generating the SQL
                               fieldTimeInterval === TimeFrames.QUARTER
                                   ? undefined
