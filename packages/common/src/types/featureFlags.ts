@@ -78,6 +78,11 @@ export enum FeatureFlags {
      * When enabled, uses VisualizationProvider + echarts instead of recharts
      */
     MetricsCatalogEchartsVisualization = 'metrics-catalog-echarts-visualization',
+
+    /**
+     * Enable bulk edit modal for filter string autocomplete
+     */
+    FilterBulkEdit = 'filter-bulk-edit',
 }
 
 export type FeatureFlag = {
